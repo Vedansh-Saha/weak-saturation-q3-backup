@@ -2,7 +2,7 @@
 
 This repository contains the source code, certificates, verification records, and LaTeX source accompanying
 
-**Weak Saturation of the 3-Cube in Complete Graphs: Exact Values at Orders 9--11**.
+**Weak Saturation of the 3-Cube in Complete Graphs: Exact Values at Orders 9,10,11**.
 
 The manuscript establishes
 
