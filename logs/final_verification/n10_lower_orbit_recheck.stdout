@@ -1,0 +1,1 @@
+PASS: no 6-edge seed percolates, hence wsat(10,Q3)>=18 under the canonical first-edge reduction.

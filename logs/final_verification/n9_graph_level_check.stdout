@@ -1,0 +1,5 @@
+copies=7560
+initial_Q3_copies=0
+certificate_steps=20
+final_edges=36
+PASS: n=9 certificate verified against all 7,560 labelled copies of Q3 in K9.

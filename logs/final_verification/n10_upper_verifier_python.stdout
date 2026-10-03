@@ -1,0 +1,7 @@
+PASS
+Initial edges: 18
+Added edges: 27
+Final edges: 45
+Initial graph is Q3-free.
+Every added edge completes a Q3.
+Therefore wsat(10,Q3) <= 18.

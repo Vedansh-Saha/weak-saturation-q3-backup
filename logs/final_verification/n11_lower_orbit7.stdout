@@ -1,0 +1,1 @@
+PASS: no 7-edge seed percolates. Thus wsat(K11,Q3)>=19 after the canonical first-edge reduction.

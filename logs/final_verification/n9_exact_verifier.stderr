@@ -1,0 +1,4 @@
+distinct_Q3_copies=7560
+distinct_outside_edge_masks=7122
+four_edge_seeds=10626 percolating=0 max_closure=16
+five_edge_seeds=42504 percolating=6864 max_closure=24

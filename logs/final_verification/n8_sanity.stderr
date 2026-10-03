@@ -1,0 +1,5 @@
+n=8 distinct_Q3_copies=840 outside_edges=16
+3-edge seeds=560 percolating=0 max_closure=6
+4-edge seeds=1820 percolating=768 max_closure=16
+sanity PASS: wsat(K8,Q3)=15.
+seed: 03 05 06 12

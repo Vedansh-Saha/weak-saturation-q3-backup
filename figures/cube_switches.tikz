@@ -1,0 +1,51 @@
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \tikzset{
+    v/.style={circle,draw=black,thick,minimum size=5mm,inner sep=0pt,font=\scriptsize\bfseries},
+    core/.style={draw=black!58,line width=0.95pt},
+    gone/.style={draw=markedred,line width=1.6pt,densely dashed},
+    add/.style={draw=activationgreen,line width=2.1pt},
+    qlab/.style={font=\footnotesize\bfseries,align=center},
+  }
+  \foreach \sx/\lab in {0/$C$,4.15/$C_1$,8.30/$C_2$,12.45/$C_3$} {
+    \begin{scope}[shift={(\sx,0)}]
+      \coordinate (a0) at (0,0); \coordinate (a1) at (0,1.55);
+      \coordinate (a2) at (1.55,0); \coordinate (a3) at (1.55,1.55);
+      \coordinate (a4) at (0.40,0.40); \coordinate (a5) at (0.40,1.95);
+      \coordinate (a6) at (1.95,0.40); \coordinate (a7) at (1.95,1.95);
+      \draw[core] (a0)--(a1)--(a3)--(a2)--(a0);
+      \draw[core] (a4)--(a5)--(a7)--(a6)--(a4);
+      \draw[core] (a0)--(a4) (a1)--(a5) (a2)--(a6) (a3)--(a7);
+      \node[v] at (a0) {0}; \node[v] at (a1) {1}; \node[v] at (a2) {2}; \node[v] at (a3) {3};
+      \node[v] at (a4) {4}; \node[v] at (a5) {5}; \node[v] at (a6) {6}; \node[v] at (a7) {7};
+      \node[qlab] at (0.98,2.78) {\lab};
+    \end{scope}
+  }
+
+  % C_1: remove 01,67; add 07,16
+  \begin{scope}[shift={(4.15,0)}]
+    \draw[gone] (0,0)--(0,1.55);
+    \draw[gone] (1.95,0.40)--(1.95,1.95);
+    \draw[add] (0,0)--(1.95,1.95);
+    \draw[add] (0,1.55)--(1.95,0.40);
+  \end{scope}
+  % C_2: remove 02,57; add 07,25
+  \begin{scope}[shift={(8.30,0)}]
+    \draw[gone] (0,0)--(1.55,0);
+    \draw[gone] (0.40,1.95)--(1.95,1.95);
+    \draw[add] (0,0)--(1.95,1.95);
+    \draw[add] (0,1.55)--(0.40,1.95);
+  \end{scope}
+  % C_3: remove 04,37; add 07,34
+  \begin{scope}[shift={(12.45,0)}]
+    \draw[gone] (0,0)--(0.40,0.40);
+    \draw[gone] (1.55,1.55)--(1.95,1.95);
+    \draw[add] (0,0)--(1.95,1.95);
+    \draw[add] (1.55,1.55)--(0,1.55);
+  \end{scope}
+
+  \node[font=\scriptsize,anchor=north] at (2.0,-0.30) {$C$};
+  \node[font=\scriptsize,anchor=north] at (6.15,-0.30) {$C-\{01,67\}+\{07,16\}$};
+  \node[font=\scriptsize,anchor=north] at (10.30,-0.30) {$C-\{02,57\}+\{07,25\}$};
+  \node[font=\scriptsize,anchor=north] at (14.45,-0.30) {$C-\{04,37\}+\{07,34\}$};
+  \node[font=\scriptsize,anchor=north] at (7.2,-0.78) {green: switch edges; red dashed: removed cube edges};
+\end{tikzpicture}

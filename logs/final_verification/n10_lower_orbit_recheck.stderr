@@ -1,0 +1,27 @@
+group=8 cubes=37800 base=840
+all=1107568 reps=146131
+full reps=0
+6:11736 7:4255 8:10379 9:18679 10:10428 11:16430 12:7250 13:6366 14:5364 15:2826 16:1877 17:9764 18:8564 24:16579 25:15634 
+	Command being timed: "./n10_lower_orbit_recheck_final"
+	User time (seconds): 23.56
+	System time (seconds): 0.00
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:23.56
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 13740
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3802
+	Voluntary context switches: 1
+	Involuntary context switches: 41
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

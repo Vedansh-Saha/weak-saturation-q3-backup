@@ -1,0 +1,27 @@
+n = 9, Q3 weak-saturation certificate
+Initial edges (16): 02, 03, 04, 05, 08, 12, 13, 15, 23, 26, 28, 37, 45, 46, 57, 67
+Graph6: H^bHOm_
+
+Saturation order:
+ 1: 01  witness: 01 02 04 13 15 23 26 37 45 46 57 67
+ 2: 14  witness: 01 03 05 12 14 23 26 37 45 46 57 67
+ 3: 48  witness: 03 05 08 23 26 28 37 45 46 48 57 67
+ 4: 78  witness: 01 03 05 12 14 23 28 37 45 48 57 78
+ 5: 06  witness: 03 05 06 23 26 28 37 45 46 48 57 78
+ 6: 16  witness: 03 05 08 13 15 16 23 26 28 45 46 48
+ 7: 17  witness: 03 05 06 12 14 17 23 26 37 45 46 57
+ 8: 18  witness: 03 05 06 13 15 18 23 26 28 45 46 48
+ 9: 24  witness: 04 05 06 13 14 15 23 24 26 37 57 67
+10: 25  witness: 03 06 08 13 15 18 23 25 26 45 46 48
+11: 27  witness: 03 05 06 12 13 16 24 27 37 45 46 57
+12: 34  witness: 05 06 08 13 16 18 23 25 28 34 45 46
+13: 35  witness: 04 05 06 15 16 17 24 26 27 34 35 37
+14: 36  witness: 05 06 08 14 16 18 24 25 28 34 35 36
+15: 38  witness: 05 06 08 14 16 18 24 25 26 34 35 38
+16: 47  witness: 03 05 06 15 16 17 23 26 27 34 45 47
+17: 56  witness: 04 06 08 13 16 18 23 24 28 35 45 56
+18: 58  witness: 04 06 08 13 16 18 23 24 26 35 45 58
+19: 68  witness: 03 05 08 12 15 18 24 26 34 36 45 68
+20: 07  witness: 05 06 07 14 16 17 24 25 27 34 35 36
+
+The initial graph is Q3-free; every listed edge is absent immediately before insertion and completes the displayed copy of Q3; the final graph is K9.

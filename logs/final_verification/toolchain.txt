@@ -1,0 +1,7 @@
+g++: g++ (Debian 14.2.0-19) 14.2.0
+go: go version go1.23.2 linux/amd64
+python: Python 3.13.5
+pdflatex: pdfTeX 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian)
+kernel: Linux 6.18.44 x86_64 GNU/Linux
+cpu_model: AMD EPYC 9V74 80-Core Processor
+online_cpus: 5

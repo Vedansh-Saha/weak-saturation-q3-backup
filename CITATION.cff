@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use the computational materials in this repository, please cite the associated manuscript."
+title: "Computational materials for Weak Saturation of the 3-Cube in Complete Graphs: Exact Values at Orders 9--11"
+authors:
+  - family-names: Saha
+    given-names: Vedansh
+date-released: 2026-10-03
+version: "1.0.0"
+type: software
+abstract: "Source code, certificates, and verification records for the exact weak saturation values wsat(K_9,Q_3)=16, wsat(K_10,Q_3)=18, and wsat(K_11,Q_3)=19."
+keywords:
+  - weak saturation
+  - graph bootstrap percolation
+  - hypercube
+  - extremal graph theory
+  - computer-assisted proof

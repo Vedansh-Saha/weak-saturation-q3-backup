@@ -1,0 +1,29 @@
+m=43 cubes=135650 group=24
+reps6=300563
+generated children=11120831 gen_sec=0.322211
+reps7=1498208 dedup_sec=0.567914
+closure_sec=18.5095 full_reps=0 maxclosure=33
+7:134379 8:34335 9:77453 10:173943 11:82265 12:159735 13:105222 14:66258 15:80232 16:41434 17:30688 18:68146 19:53452 24:61979 25:164588 26:93500 33:70599 
+	Command being timed: "./n11_lower_orbit7"
+	User time (seconds): 76.26
+	System time (seconds): 0.08
+	Percent of CPU this job got: 379%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:20.11
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 271860
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 79368
+	Voluntary context switches: 7
+	Involuntary context switches: 354
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 23448
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

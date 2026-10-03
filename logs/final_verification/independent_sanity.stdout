@@ -1,0 +1,7 @@
+n9_certificate.json PASS distinct_cubes= 7560 graph6= PASS
+n10_certificate.json PASS distinct_cubes= 37800 graph6= PASS
+n11_certificate.json PASS distinct_cubes= 138600 graph6= PASS
+switch 1 PASS (0, 2, 4, 6, 7, 3, 5, 1)
+switch 2 PASS (0, 1, 4, 5, 7, 3, 6, 2)
+switch 3 PASS (0, 1, 2, 3, 7, 5, 6, 4)
+ALL INDEPENDENT SANITY CHECKS PASS

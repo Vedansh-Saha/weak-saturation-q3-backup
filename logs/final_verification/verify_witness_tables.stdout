@@ -1,0 +1,4 @@
+n=9: 20 witness rows PASS
+n=10: 27 witness rows PASS
+n=11: 36 witness rows PASS
+PASS: all vertex maps, cube images, prerequisites, dependencies, and final graphs verified.
