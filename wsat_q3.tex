@@ -124,7 +124,7 @@ Consequently
 \[
 |V(Q_3)|=8,\qquad |E(Q_3)|=12,\qquad \delta(Q_3)=3.
 \]
-Edges are written as concatenated endpoint labels; when the vertex $10$ occurs, a thin space separates the labels, so $0\!10$ denotes the edge $\{0,10\}$.
+Edges are written as concatenated endpoint labels; when the vertex $10$ occurs, a thin space separates the labels, so $0\,10$ denotes the edge $\{0,10\}$.
 
 The automorphism group has order
 \[
@@ -188,7 +188,7 @@ g^*(t)=\min_{\substack{s\ge1,\ i_1,\ldots,i_s\in\{1,\ldots,7\}\\ i_1+\cdots+i_s=
 \]
 In particular, $g^*(1)=2$, $g^*(2)=4$, and $g^*(3)=6$.
 
-For completeness, the finite calculation behind (2.4) can be expressed using induced cube edges. Let
+The calculation behind (2.4) follows from the induced-edge maxima in the cube. Let
 \[
 m_i=\max_{|S|=i}|E(Q_3[S])|.
 \]
@@ -236,11 +236,21 @@ U_n=E(K_n)\setminus E(C),
 Every weak saturation order can be normalized so that the first edge is $e^*$.
 
 \begin{lemma}[First-edge normalization]\label{lem:first}
-Let $F$ be weakly $Q_3$-saturated in $K_n$, and let $e$ be the first edge in a legal addition order. There is a relabelling of $V(K_n)$ under which $e=e^*$ and $C-e^*\subseteq F$.
+Let $F$ be weakly $Q_3$-saturated in $K_n$, and let $e$ be the first edge in a
+legal addition order. There is a relabelling of $V(K_n)$ under which
+\[
+e=e^*,\qquad e^*\notin F,\qquad E(C)\setminus\{e^*\}\subseteq F,
+\]
+and every edge of $F$ outside $E(C)$ belongs to $U_n$.
 \end{lemma}
 
 \begin{proof}
-The first edge $e$ completes a copy of $Q_3$ whose other eleven edges already belong to $F$. Since $\Aut(Q_3)$ is edge-transitive, that marked copy is isomorphic to $(C,e^*)$. Extending the corresponding bijection on its eight vertices to a permutation of $V(K_n)$ gives the required relabelling.
+The first edge $e$ is absent from $F$ and completes a copy $Q$ of $Q_3$ whose
+other eleven edges lie in $F$. Since $\Aut(Q_3)$ is edge-transitive, there is
+an isomorphism of the marked pair $(Q,e)$ with $(C,e^*)$. Extend this
+isomorphism to a permutation of $V(K_n)$. Under the resulting relabelling,
+$e=e^*$ and $E(C)\setminus\{e^*\}\subseteq F$. Every remaining edge of $F$
+lies outside $E(C)$ and hence belongs to $U_n$.
 \end{proof}
 
 \begin{definition}[Outside closure]\label{def:closure}
@@ -286,12 +296,26 @@ Copies with the same outside set $M(Q)$ produce the same implications and can be
 \end{algorithmic}
 \end{algorithm}
 
-\begin{lemma}[Correctness of Algorithm~\ref{alg:closure}]
+\begin{lemma}[Correctness of Algorithm~\ref{alg:closure}]\label{lem:closure}
 Algorithm~\ref{alg:closure} terminates and returns $\cl_n(S)$.
 \end{lemma}
 
 \begin{proof}
-Every insertion into $T$ is justified by an implication $A\to e$ with $A\subseteq T$, hence $T\subseteq\cl_n(S)$ throughout. Each edge is inserted at most once, so the queue receives at most $|U_n|$ edge insertions and the algorithm terminates. At termination no implication with antecedent contained in $T$ has an absent target. Thus $T$ is closed under all rules defining $\cl_n(S)$. By minimality of the closure, $\cl_n(S)\subseteq T$, giving equality.\end{proof}
+Let $T_j$ denote the value of $T$ after $j$ successful insertions. We show by
+induction that $T_j\subseteq\cl_n(S)$. This holds for $j=0$ because
+$S\subseteq\cl_n(S)$. If an edge $e$ is inserted at step $j+1$, then some
+rule $A\to e$ has $A\subseteq T_j$. By the induction hypothesis,
+$A\subseteq\cl_n(S)$, so the defining closure property gives
+$e\in\cl_n(S)$. Hence every edge inserted by the algorithm lies in
+$\cl_n(S)$.
+
+At most $|U_n|$ edges can be inserted, so the algorithm terminates. At
+termination, if $A\to e$ is any closure rule with $A\subseteq T$, then the
+counter for that rule has reached $|A|$ and the target $e$ has been inserted.
+Thus $T$ is closed under all rules defining $\cl_n(S)$. Since $S\subseteq T$,
+minimality of $\cl_n(S)$ gives $\cl_n(S)\subseteq T$. Therefore
+$T=\cl_n(S)$.
+\end{proof}
 
 
 
@@ -314,13 +338,39 @@ For each $i$, injectivity of $\phi_i$ makes its image a copy of $Q_3$. The displ
 \begin{lemma}[Sequential equivalence]\label{lem:seq}
 For $S\subseteq U_n$,
 \[
-\cl_n(S)=U_n
+(C-e^*)\cup S\text{ is weakly $Q_3$-saturated in }K_n
+\quad\Longleftrightarrow\quad
+\cl_n(S)=U_n.
 \]
-if and only if $(C-e^*)\cup S$ is weakly $Q_3$-saturated after $e^*$ is added first.
 \end{lemma}
 
 \begin{proof}
-Each closure update is supported by a copy of $Q_3$ whose other outside edges are already present. Since all edges of $C-e^*$ are present and $e^*$ is added first, every such update is a legal graph edge addition. Conversely, every legal addition outside $C$ supplies one of the implications (3.2). Therefore the edges activated by any legal saturation order are contained in the closure, while the closure layers can be serialized into a legal order.
+Suppose that $(C-e^*)\cup S$ is weakly $Q_3$-saturated. Let
+$e_1,\ldots,e_t$ be a legal order. By Lemma~\ref{lem:first}, after a
+relabelling the first edge completes $C$ and is $e^*$. Moving $e^*$ to the
+front preserves legality because an edge already available at a given stage
+remains available after additional edges have been added. Delete this first
+edge from the order.
+
+Consider an edge $e_i\in U_n$ in the resulting order. Its witnessing cube
+$Q_i$ has every edge other than $e_i$ present when $e_i$ is added. The edges of
+$Q_i$ that lie in $U_n$ therefore satisfy one of the implications (3.2).
+Induction on the order position shows that every outside edge added by the
+saturation process belongs to $\cl_n(S)$. The final graph is $K_n$, so
+$\cl_n(S)=U_n$.
+
+Conversely, suppose that $\cl_n(S)=U_n$. Define rounds by
+$T_0=S$ and
+\[
+T_{r+1}=T_r\cup\{e\in U_n:\exists Q\cong Q_3,
+M(Q)\setminus\{e\}\subseteq T_r\}.
+\]
+The sequence stabilizes because $U_n$ is finite. Add $e^*$ first. For
+$e\in T_{r+1}\setminus T_r$, its witnessing cube has all other outside
+edges in $T_r$, while all cube edges outside $U_n$ lie in $E(C)$ and are
+present after $e^*$ is added. Thus each edge in a round is legally addable
+once all earlier rounds have been added. Serializing the rounds gives a legal
+weak $Q_3$-saturation order.
 \end{proof}
 
 \begin{lemma}[Seed identity]\label{lem:seed}
@@ -351,6 +401,70 @@ Hence every superset of a percolating seed also percolates.
 The defining implications of the closure system are monotone in the current edge set. An induction on closure rounds gives the inclusion.
 \end{proof}
 
+\subsection{Enumeration of the closure rules}\label{sec:maskenumeration}
+For each $n$, construct the closure rules by enumerating all copies of $Q_3$
+in $K_n$. Choose an $8$-vertex subset $W\subseteq V(K_n)$ and enumerate the
+edge sets on $W$ isomorphic to $Q_3$. For a copy $Q$, retain only the edges
+outside the fixed cube,
+\[
+M(Q)=E(Q)\cap U_n.
+\]
+The copy yields the implications
+\[
+M(Q)\setminus\{e\}\longrightarrow e,
+\qquad e\in M(Q).
+\tag{3.4}
+\]
+If two cube copies have the same outside mask, their implications coincide,
+so the two copies can be merged for closure computation.
+
+The number of labelled cube copies is
+\[
+N_n=\binom{n}{8}\frac{8!}{|\Aut(Q_3)|},
+\tag{3.5}
+\]
+which gives
+\[
+N_9=7,560,\qquad N_{10}=37,800,\qquad N_{11}=138,600.
+\tag{3.6}
+\]
+The corresponding numbers of distinct outside masks are
+\[
+7,122,\qquad36,506,\qquad135,650.
+\tag{3.7}
+\]
+
+\begin{algorithm}[t]
+\caption{Construction of the complete outside-rule system}
+\label{alg:masks}
+\begin{algorithmic}[1]
+\Require $n\ge8$
+\Ensure distinct outside masks $\mathcal M_n$
+\State $\mathcal M_n\gets\varnothing$
+\ForAll{$W\in\binom{V(K_n)}8$}
+    \ForAll{cube edge sets on $W$ isomorphic to $Q_3$}
+        \State compute $M(Q)=E(Q)\cap U_n$
+        \State insert $M(Q)$ into $\mathcal M_n$
+    \EndFor
+\EndFor
+\State \Return $\mathcal M_n$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{lemma}[Completeness of the mask system]\label{lem:masks}
+Algorithm~\ref{alg:masks} produces every implication required by
+Definition~\ref{def:closure}.
+\end{lemma}
+
+\begin{proof}
+Every copy $Q\cong Q_3$ in $K_n$ is generated on its $8$-vertex set, so its
+outside mask occurs in $\mathcal M_n$. Conversely, every stored mask is the
+outside mask of a cube copy. The twelve edges of that cube that lie outside
+$U_n$ belong to $E(C)$, and after $e^*$ is added they are already present.
+Thus the legality of an outside edge depends on the cube only through
+$M(Q)$, and merging equal masks preserves the complete implication system.
+\end{proof}
+
 \subsection{Symmetry reduction}
 Define
 \[
@@ -368,6 +482,16 @@ so
 \tag{3.5}
 \]
 
+\begin{definition}[Canonical orbit representative]\label{def:can}
+Fix an ordering of $U_n$ and encode each subset of $U_n$ by its binary incidence
+mask. Define
+\[
+\operatorname{can}(S)=\min\{gS:g\in\Gamma_n\},
+\tag{3.8}
+\]
+where the minimum is taken in the induced lexicographic order.
+\end{definition}
+
 \begin{lemma}[Equivariance]\label{lem:equiv}
 For every $g\in\Gamma_n$ and $S\subseteq U_n$,
 \[
@@ -376,12 +500,46 @@ For every $g\in\Gamma_n$ and $S\subseteq U_n$,
 \end{lemma}
 
 \begin{proof}
-If $A\to e$ is an implication arising from a cube $Q$, then $gA\to ge$ arises from the cube $gQ$. Thus $g$ preserves the implication system. Induction over closure rounds gives the identity.
+If $A\to e$ is induced by a cube $Q$, then $gA\to ge$ is induced by the
+cube $gQ$. Hence $g$ preserves the implication system. Induction over the
+closure rounds gives the stated identity.
 \end{proof}
 
-\begin{remark}
-The lower-bound searches may therefore test one representative from each $\Gamma_n$-orbit of a fixed seed size. No information is lost under this quotient.
-\end{remark}
+\begin{lemma}[Canonicalization criterion]\label{lem:can}
+For $S,T\subseteq U_n$,
+\[
+\operatorname{can}(S)=\operatorname{can}(T)
+\quad\Longleftrightarrow\quad
+T=gS\text{ for some }g\in\Gamma_n.
+\]
+\end{lemma}
+
+\begin{proof}
+If $T=gS$, then $S$ and $T$ have the same orbit and therefore the same
+canonical representative. Conversely, if the canonical representatives
+agree, choose $g,h\in\Gamma_n$ with $gS=hT$. Then
+$T=h^{-1}gS$.
+\end{proof}
+
+By Lemmas~\ref{lem:equiv} and~\ref{lem:can}, percolation and closure size are
+constant on each orbit, so one representative from each orbit suffices.
+
+\begin{algorithm}[t]
+\caption{Complete generation of the next orbit layer}
+\label{alg:orbits}
+\begin{algorithmic}[1]
+\Require representatives $\mathcal R_k$ of all $\Gamma_n$-orbits on $k$-subsets
+\Ensure representatives $\mathcal R_{k+1}$ of all $\Gamma_n$-orbits on $(k+1)$-subsets
+\State $\mathcal C\gets\varnothing$
+\ForAll{$R\in\mathcal R_k$}
+    \ForAll{$e\in U_n\setminus R$}
+        \State insert $\operatorname{can}(R\cup\{e\})$ into $\mathcal C$
+    \EndFor
+\EndFor
+\State deduplicate $\mathcal C$
+\State \Return $\mathcal C$
+\end{algorithmic}
+\end{algorithm}
 
 \begin{lemma}[Layered orbit generation]\label{lem:layer}
 Let $\mathcal R_k$ contain one representative from every $\Gamma_n$-orbit of $k$-subsets of $U_n$. The following procedure produces a complete set of representatives for the $(k+1)$-subsets:
@@ -472,7 +630,7 @@ Here
 \[
 |U_9|=\binom92-12=24.
 \]
-A weak saturation number at most $15$ would, by (3.3), give a percolating seed of size at most $4$. By Lemma~\ref{lem:mono}, it suffices to exclude all four-edge seeds.
+A weak saturation number at most $15$ would, by (3.3), give a percolating seed of size at most $4$. By Lemma~\ref{lem:mono}, it suffices to exclude four-edge seeds, since every seed of size at most $4$ is contained in a four-edge seed and percolation is monotone.
 
 \begin{proposition}\label{prop:n9lower}
 No four-edge subset of $U_9$ percolates. Consequently,
@@ -482,7 +640,7 @@ No four-edge subset of $U_9$ percolates. Consequently,
 \end{proposition}
 
 \begin{proof}
-There are exactly $\binom{24}{4}=10,626$ four-edge subsets of $U_9$. The primary C++ enumeration visits each such subset exactly once. For each seed, Algorithm~\ref{alg:closure} computes its exact closure. Every terminal closure has fewer than $24$ edges; the largest has $16$ edges. Therefore no four-edge seed satisfies $\cl_9(S)=U_9$.
+There are exactly $\binom{24}{4}=10,626$ labelled four-edge subsets of $U_9$. The primary C++ enumeration visits each subset exactly once. Burnside's lemma gives $2,826$ orbits under the order-$4$ group $\Gamma_9$; the $n=9$ lower-bound scan does not use this quotient. For each seed, Algorithm~\ref{alg:closure} computes its exact closure. Every terminal closure has fewer than $24$ edges; the largest has $16$ edges. Therefore no four-edge seed satisfies $\cl_9(S)=U_9$.
 
 The same four-edge exclusion was recomputed by the independent Go implementation in the supplementary folder. That program constructs the $7,560$ labelled cube copies from explicit sorted edge lists, generates the corresponding closure implications, and evaluates the $10,626$ seeds with a queue-based activation routine. It returns zero percolating seeds and maximum closure size $16$.
 \end{proof}
@@ -492,7 +650,7 @@ The primary exact scan also evaluates the full five-edge layer. Among the $42,50
 The certificate itself was checked at the graph level against every labelled copy of $Q_3$ in $K_9$. The number of distinct labelled cube edge sets is
 \[
 \frac{\binom98\,8!}{|\Aut(Q_3)|}=\frac{9\cdot40320}{48}=7,560.
-\tag{4.6}
+\tag{4.5}
 \]
 The initial graph contains none of these $7,560$ cubes. Each witness row is verified as one of these labelled cube copies, with its eleven non-target edges present at the required stage, and the final graph is $K_9$. This check is implemented separately in \path{supplement/programs/n9_graph_level_check.py}.
 
@@ -504,6 +662,22 @@ The initial graph contains none of these $7,560$ cubes. Each witness row is veri
 
 \begin{proof}
 Proposition~\ref{prop:n9upper} gives $\wsat(K_9,Q_3)\le16$, while Proposition~\ref{prop:n9lower} and (3.3) give $\sigma_9\ge5$ and hence $\wsat(K_9,Q_3)\ge16$.
+\end{proof}
+
+\begin{corollary}\label{cor:n9family}
+For every $n\ge9$,
+\[
+\wsat(K_n,Q_3)\le2n-2.
+\]
+Hence $\wsat(K_n,Q_3)=2n-1$ cannot hold for any $n\ge9$.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:extension} repeatedly to the $16$-edge
+construction at $n=9$. Each extension adds two initial edges, giving
+\[
+\wsat(K_n,Q_3)\le16+2(n-9)=2n-2.
+\]
 \end{proof}
 
 \section{\texorpdfstring{The exact value at $n=10$}{The exact value at n=10}}\label{sec:n10}
@@ -554,7 +728,7 @@ Let $Q\cong Q_3$ be a copy in a current graph, let $v\in V(Q)$ have neighbours $
 The graph obtained from $Q$ by deleting $v$ and inserting $x$, with $x$ adjacent to $a,b,c$, is isomorphic to $Q_3$: it is the cube obtained by replacing the vertex $v$ by a vertex with the same three neighbours. The nine edges of $Q-v$ remain present and the three edges $xa,xb,xc$ form the three edges incident with $x$. Thus adding $xc$ completes a cube.
 \end{proof}
 
-In the $n=10$ seed, $19$ and $29$ are present initially. Applying Lemma~\ref{lem:twin} with $v=0$, whose cube neighbours are $1,2,4$, gives $49$. Applying it with $v=3$, whose cube neighbours are $1,2,7$, gives $79$. Independently, the certificate creates $39$ immediately after $01$; this edge is auxiliary for the later saturation order.
+In the $n=10$ seed, $19$ and $29$ are present initially. Applying Lemma~\ref{lem:twin} with $v=0$, whose cube neighbours are $1,2,4$, gives $49$. Applying it with $v=3$, whose cube neighbours are $1,2,7$, gives $79$. The displayed certificate also creates $39$ immediately after $01$; this edge is not required for the activations $49$, $79$, and $07$.
 
 Once $01$, $19$, $29$, and $49$ are present, the cube with vertex map
 \[
@@ -599,7 +773,7 @@ The first map replaces the cube edges $01,67$ by $07,16$; the second replaces $0
 \end{figure}
 
 \subsection{Closure layers}
-The closure of $S_{10}$ has four nontrivial layers beyond the seed:
+The closure of $S_{10}$ has three closure layers beyond the seed:
 \[
 \begin{array}{c|l}
 \text{round}&\text{edges activated}\\ \hline
@@ -617,7 +791,7 @@ Here
 \[
 |U_{10}|=\binom{10}{2}-12=33.
 \]
-To prove $\wsat(K_{10},Q_3)\ge18$, it suffices to show that no six-edge seed percolates.
+To prove $\wsat(K_{10},Q_3)\ge18$, it suffices to exclude six-edge seeds: by Lemma~\ref{lem:mono}, every percolating seed of size at most $6$ would extend to a percolating six-edge seed.
 
 There are
 \[
@@ -652,16 +826,16 @@ The proposition gives $\sigma_{10}\ge7$ and hence $\wsat(K_{10},Q_3)\ge18$. Prop
 \subsection{Upper bound}
 The eight-edge seed is
 \[
-S_{11}=\{35,38,48,68,7\!10,89,8\!10,9\!10\}.
+S_{11}=\{35,38,48,68,7\,10,89,3\,10,9\,10\}.
 \tag{6.1}
 \]
 Together with $C-01$, it gives $19$ initial edges. A legal addition order is
 \[
 \begin{array}{cccccccccc}
 01,&08,&25,&07,&09,&16,&18,&03,&05,&06,\\
-0\!10,&12,&14,&17,&19,&1\!10,&24,&27,&28,&29,\\
-2\!10,&34,&36,&39,&47,&49,&4\!10,&56,&58,&59,\\
-5\!10,&69,&6\!10,&78,&79,&8\!10.
+0\,10,&12,&14,&17,&19,&1\,10,&24,&27,&28,&29,\\
+2\,10,&34,&36,&39,&47,&49,&4\,10,&56,&58,&59,\\
+5\,10,&69,&6\,10,&78,&79,&8\,10.
 \end{array}
 \tag{6.2}
 \]
@@ -689,7 +863,7 @@ For $n=11$,
 \[
 |U_{11}|=\binom{11}{2}-12=43.
 \]
-A bound of $18$ would require a percolating seed of size at most $7$. The raw number of seven-edge seeds is
+A bound of $18$ would require a percolating seed of size at most $7$. By Lemma~\ref{lem:mono}, any percolating seed of size at most $7$ would extend to a percolating seven-edge seed. It therefore suffices to exclude seven-edge seeds. The raw number of seven-edge seeds is
 \[
 \binom{43}{7}=32,224,114.
 \]
@@ -759,11 +933,20 @@ For every $n\ge8$,
 \end{proposition}
 
 \begin{proof}
-Let $F$ be weakly $Q_3$-saturated in $K_n$, and add a new vertex $x$. Initially add $xa$ and $xb$ for distinct $a,b\in V(F)$. First follow a legal saturation order taking $F$ to $K_n$ on the old vertex set. Fix an old vertex $y\notin\{a,b\}$. Choose four further old vertices $z_1,z_2,z_3,z_4$ distinct from $a,b,y$; this is possible since $n\ge8$. Map the canonical cube by
-\[
-0\mapsto x,\quad 1\mapsto y,\quad 2\mapsto a,\quad 4\mapsto b,\quad 3,5,6,7\mapsto z_1,z_2,z_3,z_4,
-\]
-with any bijection on the last four positions. The only edge of this cube not already present is $xy$: all edges joining old vertices lie in the completed $K_n$, and $xa,xb$ were present initially. Hence $xy$ is legal. Repeating this for every $y\ne a,b$ completes all edges incident with $x$. The construction adds exactly two initial edges, proving (7.1). This is the $Q_3$ specialization of the standard clique-extension lemma of \cite{TZ2025}.
+Let $F$ be weakly $Q_3$-saturated in $K_n$, and let $x$ be a new vertex.
+Choose distinct $a,b\in V(F)$ and include $xa$ and $xb$ initially. First follow
+a legal order taking $F$ to $K_n$ on the old vertex set. Fix
+$y\in V(F)\setminus\{a,b\}$. Since $n\ge8$, four further old vertices can be
+chosen distinct from $a,b,y$. In the completed old clique choose a copy
+$Q\cong Q_3$ containing a vertex $v$ whose neighbours are $a,b,y$ and whose
+remaining four vertices are chosen arbitrarily from those four vertices.
+Replacing $v$ by $x$ gives a cube whose three edges incident with $x$ are
+$xa,xb,xy$. The first two are present and the other nine cube edges lie in the
+completed old clique. Lemma~\ref{lem:twin} therefore makes $xy$ legal. Repeating
+for every $y\in V(F)\setminus\{a,b\}$ completes all edges incident with $x$.
+Exactly two edges incident with $x$ were initially present, so (7.1) follows.
+This is the $Q_3$ specialization of the extension construction in
+Terekhov and Zhukovskii~\cite{TZ2025}.
 \end{proof}
 
 \begin{corollary}\label{cor:family}
@@ -789,7 +972,7 @@ n&8&9&10&11\\ \hline
 where the $n=8$ value is reproduced by the independent sanity check in the supplementary folder. The increments from $n=8$ to $11$ are $1,2,1$.
 
 \section{Analytic perspective}\label{sec:analytic}
-The exact lower bound at $n=9$ is a finite exhaustive statement. The invariant in (2.3) also gives nontrivial finite bounds through Theorem~2.1 of \cite{TZ2025}. The values $g^*(1),g^*(2),g^*(3)$ are given explicitly in (2.6), so that
+The exact lower bound at $n=9$ is a finite exhaustive statement. The invariant in (2.3) also gives finite lower bounds through Theorem~2.1 of \cite{TZ2025}. The values $g^*(1),g^*(2),g^*(3)$ are given explicitly in (2.6), so that
 \[
 \wsat(K_9,Q_3)\ge13,\qquad
 \wsat(K_{10},Q_3)\ge15,\qquad
@@ -806,23 +989,48 @@ A span of dimension at least $5$ would imply that every percolating seed has at 
 The combinatorial lower-bound framework of Terekhov and Zhukovskii supplies the analytic slope bound in (2.7). Obtaining a direct finite inequality at $n=9$ that reaches $16$ remains a natural problem for further work.
 
 \section{Verification architecture and reproducibility}\label{sec:repro}
-The finite lower bounds use three mathematical ingredients: a complete finite state space, the exact closure algorithm in Algorithm~\ref{alg:closure}, whose correctness is proved immediately below, and symmetry reductions proved complete in Lemmas~\ref{lem:equiv} and~\ref{lem:layer}. The implementations are exact verification layers for these finite statements.
+The finite lower-bound computations use the complete implication system of
+Section~\ref{sec:maskenumeration}. Each edge of $U_n$ is assigned an index. In
+the bit-mask implementation, a seed or closure is an integer with one bit per
+outside edge. A rule $A\to e$ is stored as an antecedent bit mask, a target
+index, and an incidence list for the edges of $A$. When an edge enters the
+closure, the counters of the rules containing that edge are incremented. A
+rule is fired exactly when its counter reaches $|A|$. Because each edge enters
+at most once, the queue performs a finite number of successful insertions, and
+Lemma~\ref{lem:closure} identifies the resulting set with the mathematical
+closure.
 
-For certificate discovery, a fixed-size seed is represented as a subset of $U_n$. A search move removes one seed edge and inserts one edge outside the seed, after which the exact closure size is recomputed. Improving moves are retained; simulated-annealing runs also accept selected worsening moves according to a decreasing temperature schedule, with random restarts. The resulting candidate seeds are subjected to the explicit witness-map verification of Lemma~\ref{lem:certificate}. The search procedure supplies candidate constructions; the witness tables establish the upper bounds.
+Canonicalization evaluates the action of every element of the finite group
+$\Gamma_n$ on the incidence mask and selects the least resulting mask. By
+Lemma~\ref{lem:can}, equality of canonical masks is equivalent to membership
+in the same orbit. Algorithm~\ref{alg:orbits} therefore generates every orbit
+at the next seed size.
+
+The independent $n=9$ Go implementation stores endpoint pairs explicitly and
+represents rule antecedents as sorted edge lists. It uses a queue of newly
+active edges and recomputes the same closure relation without the bit-mask
+state representation of the primary C++ verifier.
+
+Certificate discovery uses a fixed-cardinality local search on subsets of $U_n$. A move exchanges one seed edge with one edge outside the seed and recomputes the exact closure; the score is the closure size. The implementation also uses simulated annealing with random restarts. Each candidate seed is subjected to the explicit witness-map verifier before it is used as an upper-bound certificate. The heuristic search is not used in the lower-bound arguments.
 
 For $n=9$, the primary lower-bound verifier is written in C++ and uses integer bit masks for the $24$ outside edges. The independent lower-bound verifier is written in Go and uses explicit sorted edge lists and adjacency-style rule indexing. The graph-level certificate checker is written in Python and enumerates the $7,560$ labelled cubes as edge sets. Thus the $n=9$ lower bound and the $n=9$ upper-bound certificate are checked by implementations with different data structures and independent code paths.
 
-For $n=10$, an exact C++ orbit search tests all six-edge representatives under $\Gamma_{10}$; separate Python and C++ upper-bound verifiers check the certificate. For $n=11$, the seven-edge orbit layer is generated from the six-edge layer, canonicalized under $\Gamma_{11}$, and then tested by the C++ closure routine. The Burnside calculation is implemented independently in Python.
+For $n=10$, the exact orbit search tests all $146,131$ representatives of
+six-edge subsets under $\Gamma_{10}$. A separately implemented recheck
+reconstructs the orbit layer and closure relation independently and returns
+the same representative count and no percolating seed. Separate Python and
+C++ programs verify the upper-bound certificate. For $n=11$, the seven-edge orbit layer is generated from the six-edge layer, canonicalized under $\Gamma_{11}$, and then tested by the C++ closure routine. The Burnside calculation is implemented independently in Python.
 
 \begin{table}[t]
 \centering
-\caption{Finite lower-bound searches.}
+\caption{Finite lower-bound searches. The $n=9$ scan evaluates all labelled
+seeds; the orbit count is included for comparison.}
 \label{tab:searches}
 \begin{tabular}{lrrrrr}
 \toprule
-$n$ & $|U_n|$ & seed & raw candidates & orbit representatives & percolating \\
+$n$ & $|U_n|$ & seed size & seeds evaluated & orbit representatives & percolating \\
 \midrule
-9  & 24 & 4 & 10,626 & 10,626 & 0 \\
+9  & 24 & 4 & 10,626 & 2,826 & 0 \\
 10 & 33 & 6 & 1,107,568 & 146,131 & 0 \\
 11 & 43 & 7 & 32,224,114 & 1,498,208 & 0 \\
 \bottomrule
@@ -847,6 +1055,26 @@ $n$ & $Q_3$ copies checked & initial copies & certificate additions \\
 \end{tabular}
 \end{table}
 
+\begin{table}[t]
+\centering
+\caption{Labelled cube copies and distinct outside masks used by the closure system.}
+\label{tab:maskcounts}
+\begin{tabular}{lrr}
+\toprule
+$n$ & labelled $Q_3$ copies & distinct outside masks \\
+\midrule
+9  & 7,560   & 7,122 \\
+10 & 37,800  & 36,506 \\
+11 & 138,600 & 135,650 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The labelled-copy count is the number of explicit cube edge sets checked by
+the graph-level verifier. The distinct-mask count is the number of unique
+implication masks retained by Algorithm~\ref{alg:masks}; equal masks are
+merged because they induce identical closure rules.
+
 All machine-readable certificates, source files, exact execution logs, and hashes are included under \path{supplement/}. The root-level \texttt{README.md} gives the commands for rebuilding the paper and rerunning every theorem-bearing computation. The folder separates manuscript source, theorem-bearing programs, certificates, execution records, and file hashes so that every numerical claim has a corresponding reproducibility record.
 
 \section{Relation to prior work and open problems}\label{sec:open}
@@ -868,11 +1096,15 @@ Several questions remain.
 \end{enumerate}
 
 \section{Conclusion}
-The exact weak saturation numbers at orders $9$, $10$, and $11$ are
+The exact values are
 \[
-\boxed{16,18,19}.
+\boxed{\wsat(K_9,Q_3)=16,\qquad
+\wsat(K_{10},Q_3)=18,\qquad
+\wsat(K_{11},Q_3)=19.}
 \]
-The $n=9$ value is established by a five-edge generating seed and the exhaustive exclusion of all four-edge seeds. The $n=10$ and $n=11$ values follow from explicit certificates together with exact symmetry-reduced closure searches. The certificate tables convert each upper-bound construction into a finite sequence of explicit cube embeddings, while the closure and orbit lemmas establish completeness of the lower-bound computations. The $n=11$ certificate yields the general upper bound $\wsat(K_n,Q_3)\le2n-3$ for $n\ge11$.
+The upper bounds are given by the explicit witness tables, and the lower
+bounds by the complete finite closure searches. The $n=11$ construction gives
+$\wsat(K_n,Q_3)\le2n-3$ for every $n\ge11$.
 
 \paragraph{Code and data availability.}
 Source code, machine-readable certificates, orbit representatives, and
@@ -922,7 +1154,7 @@ N.~Terekhov and M.~Zhukovskii,
 
 \bibitem{TZrank2025}
 N.~Terekhov and M.~Zhukovskii,
-\newblock Weak saturation rank of graphs,
+\newblock Weak saturation rank: a failure of the linear algebraic approach to weak saturation,
 \newblock \emph{Combinatorica} 45 (2025),
 \newblock doi:10.1007/s00493-025-00174-y.
 
@@ -943,6 +1175,7 @@ V.~Saha,
 \newblock version 1.0.0-paper,
 \newblock Zenodo, 2026,
 \newblock doi:\url{https://doi.org/10.5281/zenodo.23121234}.
+
 
 \end{thebibliography}
 \endgroup
@@ -977,30 +1210,50 @@ Thus a row is checked by mapping this edge set through $\phi_i$. The target edge
 \endgroup
 
 \section{Burnside table}\label{app:burnside}
-Let $a_1,a_2,a_3,a_6$ denote the numbers of cycles of lengths $1,2,3,6$ in the action on the $43$ outside edges. The complete calculation is:
+For $g\in\Gamma_{11}$, let $a_j(g)$ denote the number of $j$-cycles in the
+permutation induced by $g$ on the $43$ outside edges. The fixed $k$-subsets
+are counted by
+\[
+\operatorname{Fix}_k(g)=[x^k]
+(1+x)^{a_1(g)}(1+x^2)^{a_2(g)}
+(1+x^3)^{a_3(g)}(1+x^6)^{a_6(g)}.
+\tag{B.1}
+\]
+The complete calculation is
 \[
 \begin{array}{c|r|r|r}
-\text{cycle type}&\text{multiplicity}&\operatorname{Fix}_6&\operatorname{Fix}_7\\ \hline
+\text{cycle type on }U_{11}&\text{multiplicity}&\operatorname{Fix}_6&\operatorname{Fix}_7\\
+\hline
 1^{43}&1&6,096,454&32,224,114\\
-1^{25}2^9&3&301,834&1,043,770\\
-1^{21}2^{11}&1&131,814&416,734\\
-1^{16}3^9&2&13,084&28,396\\
+1^{23}2^{10}&3&301,834&1,043,770\\
 1^{11}2^{16}&3&12,902&33,682\\
+1\,2^{21}&3&1,330&1,330\\
+1^{16}3^9&2&13,084&28,396\\
 1^6 2^5 3^5 6^2&2&498&862\\
-1^5 2^{19}&1&2,774&6,574\\
+1^2 2^9 3\,6^4&2&74&106\\
+2^8 3\,6^4&2&60&28\\
 1^3 2^{20}&4&1,710&3,610\\
-1^2 2^7 3 6^4&2&74&106\\
-1 2^{21}&3&1,330&1,330\\
-2^8 3 6^4&2&60&28\\
+1^{21}2^{11}&1&131,814&416,734\\
+1^5 2^{19}&1&2,774&6,574\\
 \midrule
 \text{total}&24&7,213,512&35,956,992
 \end{array}
-\tag{B.1}
+\tag{B.2}
 \]
-For each row, (6.3) gives the fixed-subset count. Burnside's lemma divides the column totals by $24$.
+Consequently, Burnside's lemma gives
+\[
+|X_6/\Gamma_{11}|=\frac{7,213,512}{24}=300,563,
+\qquad
+|X_7/\Gamma_{11}|=\frac{35,956,992}{24}=1,498,208.
+\tag{B.3}
+\]
+The first total equals
+$\binom{43}{6}$ after weighting by stabilizers, while the second total
+similarly accounts for the $7$-subset action. These orbit counts agree with
+the representatives produced by Algorithm~\ref{alg:orbits}.
 
 \section{Finite-search data and verification records}\label{app:records}
-The supplementary folder contains the following theorem-bearing objects.
+The supplementary material contains the executable verification programs, machine-readable certificates, orbit representatives, and execution records used for the finite computations.
 
 \begin{itemize}
 \item \textbf{Certificates:} \path{supplement/certificates/} contains the complete machine-readable certificates and witness tables.
@@ -1011,6 +1264,6 @@ The supplementary folder contains the following theorem-bearing objects.
 \item \textbf{Records and hashes:} \path{logs/} contains execution outputs and \path{SHA256SUMS.txt} contains file hashes.
 \end{itemize}
 
-The finite verification specification in \path{PROOF_SPEC.md} records the objects, closure rules, and finite statements in a form that can be formalized in a proof assistant.
+The finite verification specification in \path{PROOF_SPEC.md} records the edge sets, closure rules, orbit actions, certificate conditions, and finite statements used by the verification programs.
 
 \end{document}
