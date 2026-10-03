@@ -26,8 +26,7 @@ $$M(Q) \setminus \{e\} \to e, \qquad e \in M(Q)$$
 
 The sequential equivalence and seed identity are:
 
-$$\text{cl}_n(S) = U_n \iff (C - e^*) \cup S \text{ saturates after e^*} \text{ is added}$$
-
+$$\text{cl}_n(S) = U_n \iff (C - e^*) \cup S \text{ saturates after } e^* \text{ is added}$$
 and
 
 $$\text{wsat}(K_n, Q_3) = 11 + \sigma_n, \qquad \sigma_n = \min \{ \vert{}S\vert{} : \text{cl}_n(S) = U_n \}$$
