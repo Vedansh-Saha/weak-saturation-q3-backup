@@ -26,7 +26,7 @@ $$M(Q) \setminus \{e\} \to e, \qquad e \in M(Q)$$
 
 The sequential equivalence and seed identity are:
 
-$$\text{cl}_n(S) = U_n \iff (C - e^*) \cup S \text{ saturates after } e^* \text{ is added}$$
+$$\text{cl}_n(S) = U_n \iff (C - e^*) \cup S} \text{ saturates after } e^* \text{ is added}$$
 
 and
 
