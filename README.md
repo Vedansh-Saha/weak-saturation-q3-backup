@@ -6,11 +6,11 @@ This repository contains the source code, certificates, verification records, an
 
 The manuscript establishes
 
-$$\operatorname{wsat}(K_9,Q_3)=16,\qquad\operatorname{wsat}(K_{10},Q_3)=18,\qquad\operatorname{wsat}(K_{11},Q_3)=19,$$
+$$\text{wsat}(K_9, Q_3) = 16, \quad \text{wsat}(K_{10}, Q_3) = 18, \quad \text{wsat}(K_{11}, Q_3) = 19$$
 
 and
 
-$$\operatorname{wsat}(K_n,Q_3)\le 2n-3\qquad(n\ge 11).$$
+$$\text{wsat}(K_n, Q_3) \le 2n - 3 \quad (n \ge 11)$$
 
 ## Repository contents
 
